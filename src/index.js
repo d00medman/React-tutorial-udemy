@@ -19,7 +19,12 @@ class App extends Component{
       selectedVideo: null
     }
 
-    YTSearch({key:API_KEY, term:'surfing'}, (videos) => {
+    this.videoSearch('surfing')
+  }
+
+  videoSearch(term){
+    console.log(term)
+    YTSearch({key:API_KEY, term:term}, (videos) => {
       // This is es6 magic which only works when the key and value are equal
       this.setState({
         videos:videos,
@@ -32,10 +37,10 @@ class App extends Component{
     // This is passing props to the child component in VideoList
     return(
       <div>
-        <SearchBar/>
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
         <VideoDetail video={this.state.selectedVideo}/>
-        <VideoList videos={this.state.videos}
-                   onVideoSelect={selectedVideo => this.setState({selectedVideo})}/>
+        <VideoList onVideoSelect={selectedVideo => this.setState({selectedVideo})}
+                   videos={this.state.videos}/>
       </div>
     )
   }

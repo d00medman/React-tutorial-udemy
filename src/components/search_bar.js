@@ -10,7 +10,7 @@ class SearchBar extends Component {
     super(props);
 
     // It is only in the constructor function that state is manipulated along these lines
-    this.state = { term: 'gabagool'};
+    this.state = { term: ''};
   }
   // Note the curly braces, which are how jsx handles variables
   // Worth noting that the setState/state management method in react is nigh identical to that in react-rails
@@ -19,11 +19,17 @@ class SearchBar extends Component {
     // the input event update the state. This is broadly how data is manipulated in data
   render() {
     return (
-      <div>
-        <input onChange={event => this.setState({ term:event.target.value })}
-               value={this.state.term}/>
+      <div className="search-bar">
+        <input value={this.state.term}
+               onChange={event => this.onInputChange(event.target.value)}/>
       </div>
     )
+  }
+
+  onInputChange(term){
+    console.log(term)
+    this.setState({term})
+    this.props.onSearchTermChange(term)
   }
 
 }
