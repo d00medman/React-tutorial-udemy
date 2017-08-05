@@ -9,11 +9,17 @@ class SearchBar extends Component {
     // this super method allows a component to inherit all the props of its parent component
     super(props);
 
+    // It is only in the constructor function that state is manipulated along these lines
     this.state = { term: ''};
   }
   // Note the curly braces, which are how jsx handles variables
+  // Worth noting that the setState/state management method in react is nigh identical to that in react-rails
   render() {
-    return <input onChange={event => console.log(event.target.value)}/>
+    return (
+      <div>
+        <input onChange={event => this.setState({ term:event.target.value })}/>
+      </div>
+    )
   }
 
 }
