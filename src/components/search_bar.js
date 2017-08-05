@@ -10,14 +10,18 @@ class SearchBar extends Component {
     super(props);
 
     // It is only in the constructor function that state is manipulated along these lines
-    this.state = { term: ''};
+    this.state = { term: 'gabagool'};
   }
   // Note the curly braces, which are how jsx handles variables
   // Worth noting that the setState/state management method in react is nigh identical to that in react-rails
+  // The fact that the value is set by state means only the state changes can effect the form.
+    // Sort of realized this in my work w/react-rails. If you're setting the value in state, you also need to have
+    // the input event update the state. This is broadly how data is manipulated in data
   render() {
     return (
       <div>
-        <input onChange={event => this.setState({ term:event.target.value })}/>
+        <input onChange={event => this.setState({ term:event.target.value })}
+               value={this.state.term}/>
       </div>
     )
   }
