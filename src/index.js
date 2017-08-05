@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -23,7 +24,6 @@ class App extends Component{
   }
 
   videoSearch(term){
-    console.log(term)
     YTSearch({key:API_KEY, term:term}, (videos) => {
       // This is es6 magic which only works when the key and value are equal
       this.setState({
@@ -34,10 +34,12 @@ class App extends Component{
   }
 
   render() {
-    // This is passing props to the child component in VideoList
+    // Lodash is great for throttling user input
+    const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300)
+
     return(
       <div>
-        <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
+        <SearchBar onSearchTermChange={videoSearch}/>
         <VideoDetail video={this.state.selectedVideo}/>
         <VideoList onVideoSelect={selectedVideo => this.setState({selectedVideo})}
                    videos={this.state.videos}/>
