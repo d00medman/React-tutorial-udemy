@@ -6,6 +6,7 @@ import React from 'react';
 
 
 const VideoDetail = ({video}) => {
+  // This loading component is cool. I like it a lot
   if(!video){
     return <div>Loading...</div>
   }
